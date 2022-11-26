@@ -1,0 +1,5 @@
+﻿  main.c
+C:\Users\Administrator\Desktop\final_exam_project\main.c(89,34): warning C4101: 'num1' :참조되지 않은 지역 변수입니다.
+C:\Users\Administrator\Desktop\final_exam_project\main.c(89,27): warning C4101: 'num10' :참조되지 않은 지역 변수입니다.
+C:\Users\Administrator\Desktop\final_exam_project\main.c(209,11): warning C4098: 'quit': 'void' 함수에서 값을 반환하고 있습니다.
+  final_exam_project.vcxproj -> C:\Users\Administrator\Desktop\final_exam_project\Debug\final_exam_project.exe
