@@ -22,6 +22,7 @@ struct menu menu_list[MAX_ROW][MAX_COL] =
 {{30, "케이준 양념 감자(소)", 1800}, {31, "케이준 양념 감자(중)", 3200}, {32, "치즈스틱", 2000}},
 {{40, "콜라", 1600}, {41, "오렌지주스", 2000}, {42, "청포도에이드", 2200}} };
 struct selectedMenu cart[MAX_LIST];
+struct selectedMenu menu_log[MAX_ROW][MAX_COL];
 
 // - 정수형
 int list_top = 0;

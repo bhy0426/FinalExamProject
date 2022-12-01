@@ -27,6 +27,23 @@ void print_cart();
 // - 메뉴를 보여주고 무슨 작업을 할지 결정하는 메인 화면
 int main(void)
 {
+	FILE* fp;
+	fp = fopen("menu_log.txt", "r");
+	if (fp == NULL)
+	{
+		printf("파일 열기 오류");
+		exit(1);
+	}
+	for (int r = 0; r < MAX_ROW; r++)
+	{
+		for (int c = 0; c < MAX_COL; c++)
+		{
+			struct selectedMenu x = menu_log[r][c];
+			x.menu.name = malloc(20);
+			fscanf(fp, "%d %s %d %d\n", &x.menu.num, &x.menu.name, &x.menu.cost, &x.count);
+			printf("%d %s %d %d\n", x.menu.num, x.menu.name, x.menu.cost, x.count);
+		}
+	}
 	int num_main;
 
 	while (1)
