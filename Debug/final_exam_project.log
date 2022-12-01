@@ -1,8 +1,7 @@
 ﻿  main.c
-C:\Users\Administrator\Desktop\FinalExamProject\main.c(43,15): warning C4477: 'fscanf' : 서식 문자열 '%s'에 'char *' 형식의 인수가 필요하지만 variadic 인수 2의 형식이 'char **'입니다.
-C:\Users\Administrator\Desktop\FinalExamProject\main.c(43,15): warning C4477: 'fscanf' : 서식 문자열 '%d'에 'int *' 형식의 인수가 필요하지만 variadic 인수 4의 형식이 'short *'입니다.
-C:\Users\Administrator\Desktop\FinalExamProject\main.c(43,15): message : 서식 문자열에서 '%hd'을(를) 사용하는 것이 좋습니다.
-C:\Users\Administrator\Desktop\FinalExamProject\main.c(106,34): warning C4101: 'num1' :참조되지 않은 지역 변수입니다.
-C:\Users\Administrator\Desktop\FinalExamProject\main.c(106,27): warning C4101: 'num10' :참조되지 않은 지역 변수입니다.
-C:\Users\Administrator\Desktop\FinalExamProject\main.c(226,11): warning C4098: 'quit': 'void' 함수에서 값을 반환하고 있습니다.
+C:\Users\Administrator\Desktop\FinalExamProject\main.c(46,15): warning C4477: 'fscanf' : 서식 문자열 '%d'에 'int *' 형식의 인수가 필요하지만 variadic 인수 4의 형식이 'short *'입니다.
+C:\Users\Administrator\Desktop\FinalExamProject\main.c(46,15): message : 서식 문자열에서 '%hd'을(를) 사용하는 것이 좋습니다.
+C:\Users\Administrator\Desktop\FinalExamProject\main.c(112,34): warning C4101: 'num1' :참조되지 않은 지역 변수입니다.
+C:\Users\Administrator\Desktop\FinalExamProject\main.c(112,27): warning C4101: 'num10' :참조되지 않은 지역 변수입니다.
+C:\Users\Administrator\Desktop\FinalExamProject\main.c(232,11): warning C4098: 'quit': 'void' 함수에서 값을 반환하고 있습니다.
   final_exam_project.vcxproj -> C:\Users\Administrator\Desktop\FinalExamProject\Debug\final_exam_project.exe

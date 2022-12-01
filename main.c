@@ -27,7 +27,9 @@ void print_cart();
 // - 메뉴를 보여주고 무슨 작업을 할지 결정하는 메인 화면
 int main(void)
 {
-	FILE* fp;
+	// + 모양만 알고리즘
+	// 사용자들이 가장 많이 고른 메뉴를 추천
+	// 
 	fp = fopen("menu_log.txt", "r");
 	if (fp == NULL)
 	{
@@ -39,11 +41,15 @@ int main(void)
 		for (int c = 0; c < MAX_COL; c++)
 		{
 			struct selectedMenu x = menu_log[r][c];
-			x.menu.name = malloc(20);
-			fscanf(fp, "%d %s %d %d\n", &x.menu.num, &x.menu.name, &x.menu.cost, &x.count);
+			//menu_log[r][c].menu.name = malloc(sizeof(char) * 20);
+			char ch[12][20];
+			fscanf(fp, "%d %s %d %d\n", &x.menu.num, ch[(3 * r) + c], &x.menu.cost, &x.count);
+			x.menu.name = ch[(3 * r) + c];
 			printf("%d %s %d %d\n", x.menu.num, x.menu.name, x.menu.cost, x.count);
 		}
 	}
+	fclose(fp);
+	//
 	int num_main;
 
 	while (1)
@@ -252,7 +258,29 @@ void quit()
 	print_cart();
 	printf("금액 : %d\n", bill);
 	printf("잔돈 : %d\n", bill - result);
-
+	fp = fopen("menu_log.txt", "a");
+	fseek(fp, 0L, SEEK_SET);
+	for (int i = 0; i < list_top; i++)
+	{
+		for (int r = 0; r < MAX_ROW; r++)
+		{
+			for (int c = 0; c < MAX_COL; c++)
+			{
+				if (cart[i].menu.num == menu_log[r][c].menu.num)
+					menu_log[r][c].count += cart[i].count;
+			}
+		}
+	}
+	for (int r = 0; r < MAX_ROW; r++)
+	{
+		for (int c = 0; c < MAX_COL; c++)
+		{
+			struct selectedMenu x = menu_log[r][c];
+			printf("%d %s %d %d\n", menu_log[r][c].menu.num, menu_log[r][c].menu.name, menu_log[r][c].menu.cost, menu_log[r][c].count);
+			fprintf(fp, "%d %s %d %d\n", x.menu.num, x.menu.name, x.menu.cost, x.count);
+		}
+	}
+	fclose(fp);
 	exit(1);
 }
 // 6. initiate()
