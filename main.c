@@ -19,7 +19,7 @@
 void print_menu();
 void add();
 void cancel();
-void quit();
+void quit(FILE* fp);
 void initiate();
 void print_cart();
 
@@ -30,7 +30,8 @@ int main(void)
 	// + 모양만 알고리즘
 	// 사용자들이 가장 많이 고른 메뉴를 추천
 	// 
-	fp = fopen("menu_log.txt", "r");
+	FILE* fp;
+	fp = fopen("menu_log.txt", "r+");
 	if (fp == NULL)
 	{
 		printf("파일 열기 오류");
@@ -43,17 +44,25 @@ int main(void)
 			struct selectedMenu x = menu_log[r][c];
 			//menu_log[r][c].menu.name = malloc(sizeof(char) * 20);
 			char ch[12][20];
-			fscanf(fp, "%d %s %d %d\n", &x.menu.num, ch[(3 * r) + c], &x.menu.cost, &x.count);
+			fscanf(fp, "%d %s %d %d", &x.menu.num, ch[(3 * r) + c], &x.menu.cost, &x.count);
 			x.menu.name = ch[(3 * r) + c];
 			printf("%d %s %d %d\n", x.menu.num, x.menu.name, x.menu.cost, x.count);
 		}
 	}
-	fclose(fp);
-	//
+	for (int j = 0; j < MAX_ROW; j++)
+	{
+		for (int k = 0; k < MAX_COL; k++)
+		{
+			struct selectedMenu x = menu_log[j][k];
+			printf("%d %s %d %d\n", x.menu.num, x.menu.name, x.menu.cost, x.count);
+			fprintf(fp, "%d %s %d %d\n", x.menu.num, x.menu.name, x.menu.cost, x.count);
+		}
+	}
 	int num_main;
 
 	while (1)
 	{
+		
 		print_menu();
 		printf("지불할 총액 :       %d\n\n", result);
 		printf("1. 추가\n2. 취소\n3. 입력종료\n0. 처음화면(초기화)\n");
@@ -72,7 +81,7 @@ int main(void)
 			cancel();
 			break;
 		case 3:
-			quit();
+			quit(fp);
 			break;
 		}
 		// 콘솔 화면 지우기
@@ -222,7 +231,7 @@ void cancel()
 }
 // 5. quit()
 // - 고객에게 받은 금액을 입력 후 계산
-void quit()
+void quit(FILE *fp)
 {
 	int num = 0;
 	int bill;
@@ -258,19 +267,19 @@ void quit()
 	print_cart();
 	printf("금액 : %d\n", bill);
 	printf("잔돈 : %d\n", bill - result);
-	fp = fopen("menu_log.txt", "a");
+	//fp = fopen("menu_log.txt", "w");
 	fseek(fp, 0L, SEEK_SET);
-	for (int i = 0; i < list_top; i++)
-	{
-		for (int r = 0; r < MAX_ROW; r++)
-		{
-			for (int c = 0; c < MAX_COL; c++)
-			{
-				if (cart[i].menu.num == menu_log[r][c].menu.num)
-					menu_log[r][c].count += cart[i].count;
-			}
-		}
-	}
+	//for (int i = 0; i < list_top; i++)
+	//{
+	//	for (int r = 0; r < MAX_ROW; r++)
+	//	{
+	//		for (int c = 0; c < MAX_COL; c++)
+	//		{
+	//			if (cart[i].menu.num == menu_log[r][c].menu.num)
+	//				menu_log[r][c].count += cart[i].count;
+	//		}
+	//	}
+	//}
 	for (int r = 0; r < MAX_ROW; r++)
 	{
 		for (int c = 0; c < MAX_COL; c++)
