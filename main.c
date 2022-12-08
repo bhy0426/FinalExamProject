@@ -6,7 +6,6 @@
 // 
 // 제작 - 변하연, 김경수, 김두나
 // 
-// 
 ///////////////////////////////////////////////////////////
 
 #define _CRT_SECURE_NO_WARNINGS
@@ -27,9 +26,7 @@ void print_cart();
 // - 메뉴를 보여주고 무슨 작업을 할지 결정하는 메인 화면
 int main(void)
 {
-	// + 모양만 알고리즘
 	// 사용자들이 가장 많이 고른 메뉴를 추천
-	// 
 	FILE* fp;
 	fp = fopen("menu_log.txt", "r+");
 	if (fp == NULL)
@@ -41,21 +38,18 @@ int main(void)
 	{
 		for (int c = 0; c < MAX_COL; c++)
 		{
-			struct selectedMenu x = menu_log[r][c];
-			//menu_log[r][c].menu.name = malloc(sizeof(char) * 20);
 			char ch[12][20];
-			fscanf(fp, "%d %s %d %d", &x.menu.num, ch[(3 * r) + c], &x.menu.cost, &x.count);
-			x.menu.name = ch[(3 * r) + c];
-			printf("%d %s %d %d\n", x.menu.num, x.menu.name, x.menu.cost, x.count);
+			fscanf(fp, "%d %s %d %d", &menu_log[r][c].menus.num, ch[(3 * r) + c], &menu_log[r][c].menus.cost, &menu_log[r][c].count);
+			menu_log[r][c].menus.name = ch[(3 * r) + c];
+			printf("%d %s %d %d\n", menu_log[r][c].menus.num, menu_log[r][c].menus.name, menu_log[r][c].menus.cost, menu_log[r][c].count);
 		}
 	}
 	for (int j = 0; j < MAX_ROW; j++)
 	{
 		for (int k = 0; k < MAX_COL; k++)
 		{
-			struct selectedMenu x = menu_log[j][k];
-			printf("%d %s %d %d\n", x.menu.num, x.menu.name, x.menu.cost, x.count);
-			fprintf(fp, "%d %s %d %d\n", x.menu.num, x.menu.name, x.menu.cost, x.count);
+			fprintf(fp, "%d %s %d %d\n", menu_log[j][k].menus.num, menu_log[j][k].menus.name, menu_log[j][k].menus.cost, menu_log[j][k].count);
+			printf("%d %s %d %d\n", menu_log[j][k].menus.num, menu_log[j][k].menus.name, menu_log[j][k].menus.cost, menu_log[j][k].count);
 		}
 	}
 	int num_main;
@@ -143,7 +137,7 @@ void add()
 	// selected_menu_list에 저장된 구조체를 찾아 count만 변경해줌
 	for (int i = 0; i < list_top; i++)
 	{
-		if (num_menu == cart[i].menu.num)
+		if (num_menu == cart[i].menus.num)
 		{
 			while (1)
 			{
@@ -152,7 +146,7 @@ void add()
 			
 				if (num == 1)
 				{
-					result -= cart[i].menu.cost * cart[i].count;
+					result -= cart[i].menus.cost * cart[i].count;
 					printf("수량 입력 후 Enter > ");
 					scanf("%d", &num_count);
 					cart[i].count = num_count;
@@ -182,7 +176,7 @@ void add()
 		{
 			if (num_menu == menu_list[r][c].num)
 			{
-				cart[list_top].menu = menu_list[r][c];
+				cart[list_top].menus = menu_list[r][c];
 				cart[list_top].count = num_count;
 				list_top++;
 			}
@@ -212,10 +206,10 @@ void cancel()
 		for (int i = 0; i < list_top; i++)
 		{
 			//x = selected_menu_list[i];
-			if (num == cart[i].menu.num)
+			if (num == cart[i].menus.num)
 			{
 				is_found = 1;
-				result -= cart[i].menu.cost * cart[i].count;
+				result -= cart[i].menus.cost * cart[i].count;
 			}
 			if (is_found == 1)
 				cart[i] = cart[i + 1];
@@ -267,26 +261,26 @@ void quit(FILE *fp)
 	print_cart();
 	printf("금액 : %d\n", bill);
 	printf("잔돈 : %d\n", bill - result);
-	//fp = fopen("menu_log.txt", "w");
+	fp = fopen("menu_log.txt", "w");
 	fseek(fp, 0L, SEEK_SET);
-	//for (int i = 0; i < list_top; i++)
-	//{
-	//	for (int r = 0; r < MAX_ROW; r++)
-	//	{
-	//		for (int c = 0; c < MAX_COL; c++)
-	//		{
-	//			if (cart[i].menu.num == menu_log[r][c].menu.num)
-	//				menu_log[r][c].count += cart[i].count;
-	//		}
-	//	}
-	//}
+	for (int i = 0; i < list_top; i++)
+	{
+		for (int r = 0; r < MAX_ROW; r++)
+		{
+			for (int c = 0; c < MAX_COL; c++)
+			{
+				if (cart[i].menu.num == menu_log[r][c].menu.num)
+					menu_log[r][c].count += cart[i].count;
+			}
+		}
+	}
 	for (int r = 0; r < MAX_ROW; r++)
 	{
 		for (int c = 0; c < MAX_COL; c++)
 		{
 			struct selectedMenu x = menu_log[r][c];
-			printf("%d %s %d %d\n", menu_log[r][c].menu.num, menu_log[r][c].menu.name, menu_log[r][c].menu.cost, menu_log[r][c].count);
-			fprintf(fp, "%d %s %d %d\n", x.menu.num, x.menu.name, x.menu.cost, x.count);
+			printf("%d %s %d %d\n", menu_log[r][c].menus.num, menu_log[r][c].menus.name, menu_log[r][c].menus.cost, menu_log[r][c].count);
+			fprintf(fp, "%d %s %d %d\n", x.menus.num, x.menus.name, x.menus.cost, x.count);
 		}
 	}
 	fclose(fp);
@@ -309,7 +303,7 @@ void print_cart()
 	for (int i = 0; i < list_top; i++)
 	{
 		struct selectedMenu x = cart[i];
-		printf("%d %s %d x %d = %d\n", x.menu.num, x.menu.name, x.menu.cost, x.count, x.menu.cost * x.count);
+		printf("%d %s %d x %d = %d\n", x.menus.num, x.menus.name, x.menus.cost, x.count, x.menus.cost * x.count);
 	}
 	printf("\n");
 }

@@ -1,3 +1,4 @@
 ﻿  main_noFile.c
-C:\Users\Administrator\Desktop\FinalExamProject\main_noFile.c(101,11): warning C4098: 'add': 'void' 함수에서 값을 반환하고 있습니다.
+C:\Users\Administrator\Desktop\FinalExamProject\main_noFile.c(321,15): warning C4477: 'fscanf' : 서식 문자열 '%d'에 'int *' 형식의 인수가 필요하지만 variadic 인수 4의 형식이 'short *'입니다.
+C:\Users\Administrator\Desktop\FinalExamProject\main_noFile.c(321,15): message : 서식 문자열에서 '%hd'을(를) 사용하는 것이 좋습니다.
   final_exam_project.vcxproj -> C:\Users\Administrator\Desktop\FinalExamProject\Debug\final_exam_project.exe
