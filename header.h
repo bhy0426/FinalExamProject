@@ -3,7 +3,7 @@
 #define MAX_ROW 4
 #define MAX_COL 3
 
-// 구조체 정의
+// 구조체 선언
 struct menu {
 	int num;
 	char *name;

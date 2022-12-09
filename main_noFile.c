@@ -24,7 +24,7 @@ void cancel();
 void quit();
 void initiate();
 void print_cart();
-void file_open();
+//void file_open();
 void recommend();
 
 // 1. main()
@@ -32,8 +32,25 @@ void recommend();
 int main(void)
 {
 	// menu_log.txt 파일을 열고 데이터를 menu_log 구조체 배열에 저장
-	file_open();
-
+	//file_open();
+	// menu_log를 바탕으로 고객들이 가장 많이 고른 메뉴를 추천
+	fp = fopen("menu_log.txt", "r+");
+	if (fp == NULL)
+	{
+		printf("파일 열기 오류");
+		exit(1);
+	}
+	for (int r = 0; r < MAX_ROW; r++)
+	{
+		for (int c = 0; c < MAX_COL; c++)
+		{
+			char ch[12][20];
+			fscanf(fp, "%d %s %d %d", &menu_log[r][c].menus.num, ch[(3 * r) + c], &menu_log[r][c].menus.cost, &menu_log[r][c].count);
+			menu_log[r][c].menus.name = ch[(3 * r) + c];
+			//printf("%d %s %d %d\n", menu_log[r][c].menus.num, menu_log[r][c].menus.name, menu_log[r][c].menus.cost, menu_log[r][c].count);
+		}
+	}
+	recommend();
 	
 	int num_main;
 
@@ -68,8 +85,7 @@ int main(void)
 // - 메뉴를 출력
 void print_menu()
 {
-	// menu_log를 바탕으로 고객들이 가장 많이 고른 메뉴를 추천
-	recommend();
+
 	for (int r = 0; r < MAX_ROW; r += 2)
 	{
 		// menu_list가 2차원 배열임을 이용해서
@@ -303,27 +319,27 @@ void print_cart()
 	printf("\n");
 }
 
-// 8. file_open()
-// - 저장된 파일을 열고 데이터를 읽음
-void file_open()
-{
-	fp = fopen("menu_log.txt", "r+");
-	if (fp == NULL)
-	{
-		printf("파일 열기 오류");
-		exit(1);
-	}
-	for (int r = 0; r < MAX_ROW; r++)
-	{
-		for (int c = 0; c < MAX_COL; c++)
-		{
-			char ch[12][20];
-			fscanf(fp, "%d %s %d %d", &menu_log[r][c].menus.num, ch[(3 * r) + c], &menu_log[r][c].menus.cost, &menu_log[r][c].count);
-			menu_log[r][c].menus.name = ch[(3 * r) + c];
-			//printf("%d %s %d %d\n", menu_log[r][c].menus.num, menu_log[r][c].menus.name, menu_log[r][c].menus.cost, menu_log[r][c].count);
-		}
-	}
-}
+//// 8. file_open()
+//// - 저장된 파일을 열고 데이터를 읽음
+//void file_open()
+//{
+//	fp = fopen("menu_log.txt", "r+");
+//	if (fp == NULL)
+//	{
+//		printf("파일 열기 오류");
+//		exit(1);
+//	}
+//	for (int r = 0; r < MAX_ROW; r++)
+//	{
+//		for (int c = 0; c < MAX_COL; c++)
+//		{
+//			char ch[12][20];
+//			fscanf(fp, "%d %s %d %d", &menu_log[r][c].menus.num, ch[(3 * r) + c], &menu_log[r][c].menus.cost, &menu_log[r][c].count);
+//			menu_log[r][c].menus.name = ch[(3 * r) + c];
+//			//printf("%d %s %d %d\n", menu_log[r][c].menus.num, menu_log[r][c].menus.name, menu_log[r][c].menus.cost, menu_log[r][c].count);
+//		}
+//	}
+//}
 
 // 9. recommend()
 // - 파일에서 읽어온 데이터를 바탕으로 사용자에게 메뉴를 추천
@@ -339,7 +355,7 @@ void recommend()
 		}
 	}
 	printf("<*추천메뉴*>\n");
-	for (int r = 0; r < MAX_COL; r++)
+	for (int r = 0; r < MAX_ROW; r++)
 	{
 		for (int c = 0; c < MAX_COL; c++)
 		{
