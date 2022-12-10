@@ -39,17 +39,17 @@ int main(void)
 		for (int c = 0; c < MAX_COL; c++)
 		{
 			char ch[12][20];
-			fscanf(fp, "%d %s %d %d", &menu_log[r][c].menus.num, ch[(3 * r) + c], &menu_log[r][c].menus.cost, &menu_log[r][c].count);
-			menu_log[r][c].menus.name = ch[(3 * r) + c];
-			printf("%d %s %d %d\n", menu_log[r][c].menus.num, menu_log[r][c].menus.name, menu_log[r][c].menus.cost, menu_log[r][c].count);
+			fscanf(fp, "%d %s %d %d", &menuLog[r][c].menu.num, ch[(3 * r) + c], &menuLog[r][c].menu.cost, &menuLog[r][c].count);
+			menuLog[r][c].menu.name = ch[(3 * r) + c];
+			printf("%d %s %d %d\n", menuLog[r][c].menu.num, menuLog[r][c].menu.name, menuLog[r][c].menu.cost, menuLog[r][c].count);
 		}
 	}
 	for (int j = 0; j < MAX_ROW; j++)
 	{
 		for (int k = 0; k < MAX_COL; k++)
 		{
-			fprintf(fp, "%d %s %d %d\n", menu_log[j][k].menus.num, menu_log[j][k].menus.name, menu_log[j][k].menus.cost, menu_log[j][k].count);
-			printf("%d %s %d %d\n", menu_log[j][k].menus.num, menu_log[j][k].menus.name, menu_log[j][k].menus.cost, menu_log[j][k].count);
+			fprintf(fp, "%d %s %d %d\n", menuLog[j][k].menu.num, menuLog[j][k].menu.name, menuLog[j][k].menu.cost, menuLog[j][k].count);
+			printf("%d %s %d %d\n", menuLog[j][k].menu.num, menuLog[j][k].menu.name, menuLog[j][k].menu.cost, menuLog[j][k].count);
 		}
 	}
 	int num_main;
@@ -99,8 +99,8 @@ void print_menu()
 			printf("<디저트메뉴>\t\t\t<음료메뉴>\n");
 		for (int c = 0; c < MAX_COL; c++)
 		{
-			struct menu x = menu_list[r][c];
-			struct menu y = menu_list[r + 1][c];
+			struct Menu x = menuList[r][c];
+			struct Menu y = menuList[r + 1][c];
 			printf("%d %20s %5d\t%d %20s %5d\n", x.num, x.name, x.cost, y.num, y.name, y.cost);
 		}
 		printf("\n");
@@ -124,7 +124,7 @@ void add()
 		{
 			for (int c = 0; c < MAX_COL; c++)
 			{
-				if (num_menu == menu_list[r][c].num)
+				if (num_menu == menuList[r][c].num)
 					is_correct = 1;
 			}
 		}
@@ -135,9 +135,9 @@ void add()
 	}
 	// 만약 이미 추가한 메뉴의 메뉴번호를 입력 받으면
 	// selected_menu_list에 저장된 구조체를 찾아 count만 변경해줌
-	for (int i = 0; i < list_top; i++)
+	for (int i = 0; i < listTop; i++)
 	{
-		if (num_menu == cart[i].menus.num)
+		if (num_menu == cart[i].menu.num)
 		{
 			while (1)
 			{
@@ -146,11 +146,11 @@ void add()
 			
 				if (num == 1)
 				{
-					result -= cart[i].menus.cost * cart[i].count;
+					result -= cart[i].menu.cost * cart[i].count;
 					printf("수량 입력 후 Enter > ");
 					scanf("%d", &num_count);
 					cart[i].count = num_count;
-					result += menu_list[(num_menu / 10) - 1][num_menu % 10].cost * num_count;
+					result += menuList[(num_menu / 10) - 1][num_menu % 10].cost * num_count;
 					return;
 				}
 				if (num == 2)
@@ -174,16 +174,16 @@ void add()
 	{
 		for (int c = 0; c < MAX_COL; c++)
 		{
-			if (num_menu == menu_list[r][c].num)
+			if (num_menu == menuList[r][c].num)
 			{
-				cart[list_top].menus = menu_list[r][c];
-				cart[list_top].count = num_count;
-				list_top++;
+				cart[listTop].menu = menuList[r][c];
+				cart[listTop].count = num_count;
+				listTop++;
 			}
 		}
 	}
 	// result에 고른 메뉴의 가격과 수량을 곱하여 대입
-	result += menu_list[(num_menu / 10) - 1][num_menu % 10].cost * num_count;
+	result += menuList[(num_menu / 10) - 1][num_menu % 10].cost * num_count;
 	printf("result = %d\n", result);
 }
 // 4. cancel()
@@ -203,13 +203,13 @@ void cancel()
 		scanf("%d", &num);
 		if (num == 0)
 			return;
-		for (int i = 0; i < list_top; i++)
+		for (int i = 0; i < listTop; i++)
 		{
 			//x = selected_menu_list[i];
-			if (num == cart[i].menus.num)
+			if (num == cart[i].menu.num)
 			{
 				is_found = 1;
-				result -= cart[i].menus.cost * cart[i].count;
+				result -= cart[i].menu.cost * cart[i].count;
 			}
 			if (is_found == 1)
 				cart[i] = cart[i + 1];
@@ -221,7 +221,7 @@ void cancel()
 			printf("입력한 메뉴번호를 찾을 수 없습니다. 다시 입력해주세요.\n");
 		}
 	}
-	list_top -= 1;
+	listTop -= 1;
 }
 // 5. quit()
 // - 고객에게 받은 금액을 입력 후 계산
@@ -263,14 +263,14 @@ void quit(FILE *fp)
 	printf("잔돈 : %d\n", bill - result);
 	fp = fopen("menu_log.txt", "w");
 	fseek(fp, 0L, SEEK_SET);
-	for (int i = 0; i < list_top; i++)
+	for (int i = 0; i < listTop; i++)
 	{
 		for (int r = 0; r < MAX_ROW; r++)
 		{
 			for (int c = 0; c < MAX_COL; c++)
 			{
-				if (cart[i].menu.num == menu_log[r][c].menu.num)
-					menu_log[r][c].count += cart[i].count;
+				if (cart[i].menu.num == menuLog[r][c].menu.num)
+					menuLog[r][c].count += cart[i].count;
 			}
 		}
 	}
@@ -278,9 +278,9 @@ void quit(FILE *fp)
 	{
 		for (int c = 0; c < MAX_COL; c++)
 		{
-			struct selectedMenu x = menu_log[r][c];
-			printf("%d %s %d %d\n", menu_log[r][c].menus.num, menu_log[r][c].menus.name, menu_log[r][c].menus.cost, menu_log[r][c].count);
-			fprintf(fp, "%d %s %d %d\n", x.menus.num, x.menus.name, x.menus.cost, x.count);
+			struct selectedMenu x = menuLog[r][c];
+			printf("%d %s %d %d\n", menuLog[r][c].menu.num, menuLog[r][c].menu.name, menuLog[r][c].menu.cost, menuLog[r][c].count);
+			fprintf(fp, "%d %s %d %d\n", x.menu.num, x.menu.name, x.menu.cost, x.count);
 		}
 	}
 	fclose(fp);
@@ -300,10 +300,10 @@ void initiate()
 void print_cart()
 {
 	printf("<선택된 메뉴>\n");
-	for (int i = 0; i < list_top; i++)
+	for (int i = 0; i < listTop; i++)
 	{
 		struct selectedMenu x = cart[i];
-		printf("%d %s %d x %d = %d\n", x.menus.num, x.menus.name, x.menus.cost, x.count, x.menus.cost * x.count);
+		printf("%d %s %d x %d = %d\n", x.menu.num, x.menu.name, x.menu.cost, x.count, x.menu.cost * x.count);
 	}
 	printf("\n");
 }

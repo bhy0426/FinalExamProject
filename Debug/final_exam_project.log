@@ -1,4 +1,24 @@
 ﻿  main_noFile.c
-C:\Users\KBS\Desktop\FinalExamProject\main_noFile.c(48,15): warning C4477: 'fscanf' : 서식 문자열 '%d'에 'int *' 형식의 인수가 필요하지만 variadic 인수 4의 형식이 'short *'입니다.
-C:\Users\KBS\Desktop\FinalExamProject\main_noFile.c(48,15): message : 서식 문자열에서 '%hd'을(를) 사용하는 것이 좋습니다.
-  final_exam_project.vcxproj -> C:\Users\KBS\Desktop\FinalExamProject\Debug\final_exam_project.exe
+C:\Users\Administrator\Desktop\FinalExamProject\main_noFile.c(46,50): error C2231: '.num': 왼쪽 피연산자가 'struct'을(를) 가리킵니다. '->'를 사용하십시오.
+C:\Users\Administrator\Desktop\FinalExamProject\main_noFile.c(46,92): error C2231: '.cost': 왼쪽 피연산자가 'struct'을(를) 가리킵니다. '->'를 사용하십시오.
+C:\Users\Administrator\Desktop\FinalExamProject\main_noFile.c(46,15): warning C4477: 'fscanf' : 서식 문자열 '%d'에 'int *' 형식의 인수가 필요하지만 variadic 인수 4의 형식이 'short *'입니다.
+C:\Users\Administrator\Desktop\FinalExamProject\main_noFile.c(46,15): message : 서식 문자열에서 '%hd'을(를) 사용하는 것이 좋습니다.
+C:\Users\Administrator\Desktop\FinalExamProject\main_noFile.c(47,23): error C2231: '.name': 왼쪽 피연산자가 'struct'을(를) 가리킵니다. '->'를 사용하십시오.
+C:\Users\Administrator\Desktop\FinalExamProject\main_noFile.c(147,31): error C2231: '.num': 왼쪽 피연산자가 'struct'을(를) 가리킵니다. '->'를 사용하십시오.
+C:\Users\Administrator\Desktop\FinalExamProject\main_noFile.c(156,29): error C2231: '.cost': 왼쪽 피연산자가 'struct'을(를) 가리킵니다. '->'를 사용하십시오.
+C:\Users\Administrator\Desktop\FinalExamProject\main_noFile.c(216,28): error C2231: '.num': 왼쪽 피연산자가 'struct'을(를) 가리킵니다. '->'를 사용하십시오.
+C:\Users\Administrator\Desktop\FinalExamProject\main_noFile.c(219,28): error C2231: '.cost': 왼쪽 피연산자가 'struct'을(를) 가리킵니다. '->'를 사용하십시오.
+C:\Users\Administrator\Desktop\FinalExamProject\main_noFile.c(279,22): error C2231: '.num': 왼쪽 피연산자가 'struct'을(를) 가리킵니다. '->'를 사용하십시오.
+C:\Users\Administrator\Desktop\FinalExamProject\main_noFile.c(279,48): error C2231: '.num': 왼쪽 피연산자가 'struct'을(를) 가리킵니다. '->'를 사용하십시오.
+C:\Users\Administrator\Desktop\FinalExamProject\main_noFile.c(289,52): error C2231: '.num': 왼쪽 피연산자가 'struct'을(를) 가리킵니다. '->'를 사용하십시오.
+C:\Users\Administrator\Desktop\FinalExamProject\main_noFile.c(289,76): error C2231: '.name': 왼쪽 피연산자가 'struct'을(를) 가리킵니다. '->'를 사용하십시오.
+C:\Users\Administrator\Desktop\FinalExamProject\main_noFile.c(289,101): error C2231: '.cost': 왼쪽 피연산자가 'struct'을(를) 가리킵니다. '->'를 사용하십시오.
+C:\Users\Administrator\Desktop\FinalExamProject\main_noFile.c(290,47): error C2231: '.num': 왼쪽 피연산자가 'struct'을(를) 가리킵니다. '->'를 사용하십시오.
+C:\Users\Administrator\Desktop\FinalExamProject\main_noFile.c(290,71): error C2231: '.name': 왼쪽 피연산자가 'struct'을(를) 가리킵니다. '->'를 사용하십시오.
+C:\Users\Administrator\Desktop\FinalExamProject\main_noFile.c(290,96): error C2231: '.cost': 왼쪽 피연산자가 'struct'을(를) 가리킵니다. '->'를 사용하십시오.
+C:\Users\Administrator\Desktop\FinalExamProject\main_noFile.c(302,43): error C2078: 이니셜라이저가 너무 많습니다.
+C:\Users\Administrator\Desktop\FinalExamProject\main_noFile.c(302,32): error C2078: 이니셜라이저가 너무 많습니다.
+C:\Users\Administrator\Desktop\FinalExamProject\main_noFile.c(315,41): error C2231: '.num': 왼쪽 피연산자가 'struct'을(를) 가리킵니다. '->'를 사용하십시오.
+C:\Users\Administrator\Desktop\FinalExamProject\main_noFile.c(315,53): error C2231: '.name': 왼쪽 피연산자가 'struct'을(를) 가리킵니다. '->'를 사용하십시오.
+C:\Users\Administrator\Desktop\FinalExamProject\main_noFile.c(315,66): error C2231: '.cost': 왼쪽 피연산자가 'struct'을(를) 가리킵니다. '->'를 사용하십시오.
+C:\Users\Administrator\Desktop\FinalExamProject\main_noFile.c(315,88): error C2231: '.cost': 왼쪽 피연산자가 'struct'을(를) 가리킵니다. '->'를 사용하십시오.
